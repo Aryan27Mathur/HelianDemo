@@ -13,13 +13,15 @@ import App from './App.vue'
 //Views
 import Demo from './views/Demo.vue'
 import Home from './views/Home.vue'
+import Results from './views/Results.vue'
 // Composables
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-    {path: "/demo", component: Demo},
-    {path: "", component: Home}
+    {name: "demo", path: "/demo", component: Demo},
+    {name: "home", path: "", component: Home},
+    {name: "demoresults", path: '/demo/results', component: Results},
 ]
 
 const router = createRouter({

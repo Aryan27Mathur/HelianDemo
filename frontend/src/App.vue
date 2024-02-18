@@ -2,21 +2,19 @@
   <v-app>
     <v-main>
       <Navbar />
-      <router-view v-slot="{ Component }">
-        <transition name="fade">
+      <transition name="fade">
+        <router-view v-slot="{ Component }">
           <component :is="Component" />
-        </transition>
-      </router-view>
-      <MyFooter />
+        </router-view>
+      </transition>
     </v-main>
   </v-app>
 </template>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <style>
-  .fade-enter-active,
+.fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
 }
