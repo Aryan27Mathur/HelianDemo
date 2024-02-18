@@ -40,7 +40,7 @@
 
   async function handleEnterKey() {
     try {
-      const response = await axios.post<{ message: string }>('http://localhost:8000/newuser/', {
+      const response = await axios.post<{ message: string }>('https://helian-backend.onrender.com/newuser/', {
         name: "",
         email: email.value,
       });
