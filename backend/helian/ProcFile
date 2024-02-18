@@ -1,1 +1,1 @@
-web: gunicorn helian.wsgi
+web: gunicorn application.wsgi

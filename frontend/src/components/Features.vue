@@ -3,8 +3,8 @@
     <v-row class="ma-12"> 
         <v-col class="mx-2">
             <v-card class="bg-teal-lighten-1" variant="elevated"  height='100%'>
-                <v-card-title>Gain Valuable ESG Insights</v-card-title>
-                <v-card-text >Dive into ESG scores, metrics, and analytics for top stocks and indices, empowering informed and responsible investment choices.</v-card-text >
+                <v-card-title>Gain Valuable Impact Investing Insights</v-card-title>
+                <v-card-text >Dive into impact scores, metrics, and analytics for top stocks and indices, empowering informed and responsible investment choices.</v-card-text >
             </v-card>
         </v-col>
         <v-col class="mx-2">
@@ -15,8 +15,8 @@
         </v-col>
         <v-col class="mx-2">
             <v-card class="bg-teal-lighten-1" variant="elevated" height='100%'>
-                <v-card-title>Get Personalized Reccomendations</v-card-title>
-                <v-card-text >Receive tailored stock recommendations based on sustainability markers aligned with your interests, driving both financial returns and positive social and environmental outcomes.</v-card-text >
+                <v-card-title>Get Personalized Recommendations</v-card-title>
+                <v-card-text >Receive tailored stock recommendations based on sustainability markers aligned with your values, driving both financial returns and positive social and environmental outcomes.</v-card-text >
             </v-card>
         </v-col>
     </v-row>

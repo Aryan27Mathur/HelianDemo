@@ -8,7 +8,7 @@
         
         <!-- Subtext area -->
         <div class="text-subtitle-1 py-4" >
-          Learn about the ESG impact of companies, make smarter decisions in your portfolio, and get custom reccomedations based on your personal values. To learn more about our services, platform, or to keep up to date with us, join our newsletter.
+          Learn about the true environmental and social impact behind the companies you invest in, make better informed decisions, and get investment recommendations based on your personal values. To learn more about our services, platform, or to keep up to date with us, join our newsletter.
         </div>
         <v-text-field
         v-model="email"
