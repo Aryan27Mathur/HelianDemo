@@ -13,7 +13,7 @@
                     Results - Your Top Helian Companies
                   </h2>
                   <p class="body-1 px-12">
-                    Below are the top reccomendations for companies you should
+                    Below are the top recommendations for companies you should
                     invest in based on your personal values. To learn more about
                     our process, sign up to our platform and newsletter.
                   </p>
