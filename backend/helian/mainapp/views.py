@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponse
-from .models import User
+from .models import User, Company
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import csv
 # Create your views here.
 
 def home(request):
@@ -11,6 +12,19 @@ def home(request):
 def users(request):
     users = User.objects.all()
     return render(request, "users.html", {"users":users})
+
+def generate_companies(request):
+    csv_file_path = 'constituents.csv'
+    with open(csv_file_path, 'r') as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            company = Company.objects.create(
+                symbol=row['Symbol'],
+                name=row['Name'],
+                sector=row['Sector']
+            )
+            company.save()
+    return HttpResponse("Companies generated and added to the database.")
 
 @csrf_exempt
 def new_user(request):
