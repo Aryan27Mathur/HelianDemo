@@ -1,6 +1,7 @@
 import requests
 import csv
-from models import Company
+#from models import Company
+import json
 
 def populate_companies_from_csv(csv_file):
     with open(csv_file, 'r') as file:
@@ -13,9 +14,7 @@ def populate_companies_from_csv(csv_file):
             )
             company.save()
 
-if __name__ == '__main__':
-    csv_file_path = 'constituents.csv'
-    populate_companies_from_csv(csv_file_path)
+
 
 def testEmails():
     url = 'http://localhost:8000/newuser/'
@@ -23,5 +22,25 @@ def testEmails():
     response = requests.post(url, json=data)
 
     print(response.json())  # Output: {'message': 'User created successfully'}
+
+def testAddReport():
+    # Replace with your Django development server URL
+    url = 'http://localhost:8000/add_esg_report/'
+    # Sample payload with company symbol and esg_report link
+    data = {
+        'symbol': 'AAPL',
+        'esg_report': 'https://www.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2023.pdf'
+    }
+
+    # Send a POST request to the endpoint
+    response = requests.post(url, json=data)
+    # Print the response
+    print(response.status_code)
+    print(response.json())
+
+if __name__ == '__main__':
+    # csv_file_path = 'constituents.csv'
+    # populate_companies_from_csv(csv_file_path)
+    testAddReport()
 
 

@@ -14,7 +14,7 @@ def users(request):
     return render(request, "users.html", {"users":users})
 
 def generate_companies(request):
-    csv_file_path = 'constituents.csv'
+    csv_file_path = r"C:\Users\aryan\OneDrive\Documents\Helian\HelianDemo\backend\helian\mainapp\constituents.csv"   
     with open(csv_file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -24,7 +24,32 @@ def generate_companies(request):
                 sector=row['Sector']
             )
             company.save()
+            print(str(row['Name']) + " saved!")
     return HttpResponse("Companies generated and added to the database.")
+
+@csrf_exempt
+def add_esg_report(request):
+    if request.method == 'POST':
+        try:
+            payload = json.loads(request.body)
+            symbol = payload.get('symbol')
+            esg_report = payload.get('esg_report')
+
+            if not symbol or not esg_report:
+                return JsonResponse({'error': 'Symbol and esg_report fields are required'}, status=400)
+
+            company = Company.objects.get(symbol=symbol)
+            company.esg_report = esg_report
+            company.save()
+
+            return JsonResponse({'success': 'ESG report link updated successfully'})
+
+        except Company.DoesNotExist:
+            return JsonResponse({'error': 'Company with provided symbol does not exist'}, status=404)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON payload'}, status=400)
+
+    return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
 
 @csrf_exempt
 def new_user(request):
