@@ -5,7 +5,7 @@
         <v-row justify="center">
           <v-col cols="12">
             <h2 class="display-1 text-center">
-              Demo - Helian Reccomendation System
+              Demo - Helian Recommendation System
             </h2>
             <p class="body-1 px-12">
               This form is designed to understand your personal preferences

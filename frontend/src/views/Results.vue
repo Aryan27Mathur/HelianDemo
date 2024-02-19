@@ -65,30 +65,38 @@ const companies = ref([
     name: "Apple Inc.",
     industry: "Technology",
     esgRating: "AAA",
-  }, // Hypothetical AAA ESG rating
+    esg_report:
+      "https://www.apple.com/environment/pdf/Apple_Environmental_Progress_Report_2023.pdf",
+  },
   {
     ticker: "MSFT",
     name: "Microsoft Corporation",
     industry: "Technology",
     esgRating: "AAA",
+    esg_report:
+      "https://www.microsoft.com/en-us/corporate-responsibility/impact-summary",
   },
   {
     ticker: "GOOGL",
     name: "Alphabet Inc.",
     industry: "Technology",
     esgRating: "AAA",
+    esg_report:
+      "https://sustainability.google/reports/google-2023-environmental-report/",
   },
   {
     ticker: "FB",
     name: "Meta Platforms Inc.",
     industry: "Technology",
     esgRating: "AAA",
+    esg_report: "https://sustainability.fb.com/2023-sustainability-report/",
   },
   {
     ticker: "TSLA",
     name: "Tesla Inc.",
     industry: "Electric Vehicles",
     esgRating: "AAA",
+    esg_report: "https://www.tesla.com/impact",
   },
   {
     ticker: "BRK.A",
@@ -101,14 +109,24 @@ const companies = ref([
     name: "NVIDIA Corporation",
     industry: "Technology",
     esgRating: "AAA",
+    esg_report:
+      "https://images.nvidia.com/aem-dam/Solutions/documents/FY2023-NVIDIA-Corporate-Responsibility-Report-1.pdf",
   },
   {
     ticker: "JPM",
     name: "JPMorgan Chase & Co.",
     industry: "Finance",
     esgRating: "AAA",
+    esg_report: "https://www.jpmorganchase.com/impact/sustainability",
   },
-  { ticker: "V", name: "Visa Inc.", industry: "Finance", esgRating: "AAA" },
+  {
+    ticker: "V",
+    name: "Visa Inc.",
+    industry: "Finance",
+    esgRating: "AAA",
+    esg_report:
+      "https://vgrouplimited.com/sustainability-within-the-maritime-industry/reporting/",
+  },
   {
     ticker: "FSLR",
     name: "First Solar, Inc.",
@@ -120,12 +138,16 @@ const companies = ref([
     name: "NextEra Energy, Inc.",
     industry: "Renewable Energy",
     esgRating: "AAA",
+    esg_report:
+      "https://www.nexteraenergy.com/content/dam/nee/us/en/pdf/2023_NEE_Sustainability_Report_Final.pdf",
   },
   {
     ticker: "ENPH",
     name: "Enphase Energy, Inc.",
     industry: "Renewable Energy",
     esgRating: "AAA",
+    esg_report:
+      "https://investor.enphase.com/news-releases/news-release-details/enphase-energy-releases-2022-environmental-social-and-governance",
   },
   // Add more companies with their ticker symbols, names, industries, and hypothetical ESG ratings as needed
 ]);
