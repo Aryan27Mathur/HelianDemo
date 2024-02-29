@@ -67,3 +67,27 @@ def new_user(request):
         return JsonResponse({'message': 'Thanks for signing up! Check back for future updates to Helian.'}, status=201)
 
     return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+@csrf_exempt
+def update_esg_score(request):
+    if request.method == 'POST':
+        # Extract data from the POST request
+        print(request.body)
+        print()
+        data = json.loads(request.body)
+        is_etf = (data.get('etf') == "yes")
+        symbol = data.get('symbol')
+        total_score = data.get('total_score')
+        e_score = data.get('e_score')
+        s_score = data.get('s_score')
+        g_score = data.get('g_score')
+
+        # Create a new User object and save it to the database
+        if(is_etf):
+            #do something
+            pass
+        Company.objects.filter(symbol=symbol).update(yf_t_score=total_score, yf_e_score = e_score, yf_s_score = s_score, yf_g_score = g_score)
+
+        return HttpResponse(f"score for {symbol} updated", status=201)
+
+    return HttpResponse("Method not allowed", status=405)
