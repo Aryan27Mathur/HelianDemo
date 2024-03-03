@@ -91,3 +91,11 @@ def update_esg_score(request):
         return HttpResponse(f"score for {symbol} updated", status=201)
 
     return HttpResponse("Method not allowed", status=405)
+
+@csrf_exempt
+def get_all_company_symbols(request):
+    symbols = [item['symbol'] for item in Company.objects.all().values("symbol")]
+    print(symbols)
+
+    return HttpResponse(",".join(symbols), status=200)
+
