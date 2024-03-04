@@ -24,10 +24,7 @@ class Company(models.Model):
 class ETF(models.Model):
     symbol = models.CharField(max_length=10, unique=True)
     name = models.CharField(max_length=255)
-    yf_t_score = models.FloatField()
-    yf_e_score = models.FloatField()
-    yf_s_score = models.FloatField()
-    yf_g_score = models.FloatField()
+    vf_esg_score = models.FloatField()
 
 
     def __str__(self):

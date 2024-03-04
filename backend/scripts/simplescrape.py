@@ -1,11 +1,17 @@
+
 import requests
 from bs4 import BeautifulSoup
 import re
 
-total_score_pattern = r"Total ESG Risk Score\s+(\d+\.\d+)"
-environmental_score_pattern = r"Environmental Risk Score\s+(\d+\.\d+)"
-social_score_pattern = r"Social Risk Score\s+(\d+\.\d+)"
-governance_score_pattern = r"Governance Risk Score\s+(\d+\.\d+)"
+context_text = """
+Environment, Social and Governance (ESG) Risk RatingsTotal ESG Risk score1718th percentileLowLowEnvironment Risk Score0.5Social Risk Score7.4Governance Risk Score9.4Controversy LevelAAPLPeersCategory Average3Significant Controversy level4NoneSevereESG data provided by Sustainalytics, Inc.Last updated on 9/2023
+"""
+
+# Define regular expressions for matching the scores
+total_score_regex = re.compile(r'Total ESG Risk score(\d+)')
+environment_score_regex = re.compile(r'Environment Risk Score([\d.]+)')
+social_score_regex = re.compile(r'Social Risk Score([\d.]+)')
+governance_score_regex = re.compile(r'Governance Risk Score([\d.]+)')
 
 def send_post_request(symbol, t_score, e_score, s_score, g_score):
     url = 'http://localhost:8000/update_esg_score/'
@@ -22,8 +28,9 @@ def send_post_request(symbol, t_score, e_score, s_score, g_score):
 
 symbols = requests.get('http://localhost:8000/get_all_company_symbols/').text.split(",")
 badSymbols = []
-for i, s in enumerate(symbols):
 
+
+for i, s in enumerate(symbols):
     url = f"https://finance.yahoo.com/quote/{s}/sustainability"
 
     payload = {}
@@ -48,49 +55,27 @@ for i, s in enumerate(symbols):
 
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # Find the section with class="svelte-1dspbuk"
-    section = soup.find('section', class_='svelte-1dspbuk')
-
-    if section:
-        # Access the content of the section
-        content = section.get_text()
-        #print(content)
-    else:
+        # Find the section with class="svelte-1dspbuk"
+    try:
+        maindiv = soup.find("div", {"id": "Main"})
+        esgdata = maindiv.get_text("|").split("|")
+        
+        t_score = float(esgdata[esgdata.index('Total ESG Risk score') + 1])
+        e_score = float(esgdata[esgdata.index('Environment Risk Score') + 1])
+        s_score = float(esgdata[esgdata.index('Social Risk Score') + 1])
+        g_score = float(esgdata[esgdata.index('Governance Risk Score') + 1])
+        send_post_request(s, t_score, e_score, s_score, g_score)
+        print(s)
+    except:
         badSymbols.append(s)
         print(f"{s} not working")
+        send_post_request(s, -1, -1, -1, -1)
         continue
-
-
-    # Extract numerical values using regular expressions
-    t_score_match = re.search(total_score_pattern, content)
-    e_score_match = re.search(environmental_score_pattern, content)
-    s_score_match = re.search(social_score_pattern, content)
-    g_score_match = re.search(governance_score_pattern, content)
-
-    # Assign the matched numerical values to variables
-    if t_score_match:
-        t_score = float(t_score_match.group(1))
-    else:
-        t_score = None
-
-    if e_score_match:
-        e_score = float(e_score_match.group(1))
-    else:
-        e_score = None
-
-    if s_score_match:
-        s_score = float(s_score_match.group(1))
-    else:
-        s_score = None
-
-    if g_score_match:
-        g_score = float(g_score_match.group(1))
-    else:
-        g_score = None
-
-    send_post_request(s, t_score, e_score, s_score, g_score)
-
+ 
     if(i%10==0):
         print(f"company {i} updated")
 
 print(badSymbols)
+
+
+
