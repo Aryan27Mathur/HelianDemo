@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import csv
-import pandas as pd
+#import pandas as pd
 # Create your views here.
 
 def home(request):
@@ -28,22 +28,22 @@ def generate_companies(request):
             print(str(row['Name']) + " saved!")
     return HttpResponse("Companies generated and added to the database.")
 
-def generate_etfs(request):
+# def generate_etfs(request):
 
-    df = pd.read_csv("C:/Users/am943/Downloads/etfs_details_type_fund_flow.csv", header=0)
+#     df = pd.read_csv("C:/Users/am943/Downloads/etfs_details_type_fund_flow.csv", header=0)
 
-    esg_data = df[["Symbol", "ETF Name", "ESG Score"]]
-    etfs = []
-    for index, row in df.iterrows():
-        etf_instance = ETF(
-            symbol=row['Symbol'],
-            name=row['ETF Name'],
-            vf_esg_score=row['ESG Score']
-        )
-        etfs.append(etf_instance)
-        print(str(row['ETF Name']) + " saved!")
-    ETF.objects.bulk_create(etfs, ignore_conflicts=True)
-    return HttpResponse("Companies generated and added to the database.")
+#     esg_data = df[["Symbol", "ETF Name", "ESG Score"]]
+#     etfs = []
+#     for index, row in df.iterrows():
+#         etf_instance = ETF(
+#             symbol=row['Symbol'],
+#             name=row['ETF Name'],
+#             vf_esg_score=row['ESG Score']
+#         )
+#         etfs.append(etf_instance)
+#         print(str(row['ETF Name']) + " saved!")
+#     ETF.objects.bulk_create(etfs, ignore_conflicts=True)
+#     return HttpResponse("Companies generated and added to the database.")
    
 
 @csrf_exempt

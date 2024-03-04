@@ -19,19 +19,16 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-#SECRET_KEY = os.environ.get("SECRET_KEY")
-SECRET_KEY = "797e19d2af212a6cd121a22e1799522e"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
-DEBUG = "false"
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-#ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-ALLOWED_HOSTS = "helian-backend.onrender.com localhost 127.0.0.1".split(" ")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
 
@@ -101,8 +98,7 @@ DATABASES = {
     }
 }
 
-#database_url = os.environ.get("DATABASE_URL")
-database_url = "postgres://helian_db_user:qLznQENcg8uJh4rVcbqHYMAzpLaReosn@dpg-cn8nsv8l5elc738uhtg0-a.oregon-postgres.render.com/helian_db"
+database_url = os.environ.get("DATABASE_URL")
 
 
 DATABASES["default"] = dj_database_url.parse(database_url)
