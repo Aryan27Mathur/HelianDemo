@@ -17,8 +17,9 @@
           @keydown.enter="handleEnterKey"
           density="compact"
           placeholder="Email address"
+          color=""
           prepend-inner-icon="mdi-email-outline"
-          variant="outlined"
+          variant="solo"
         ></v-text-field>
         <p v-if="signupMessage">{{ signupMessage }}</p>
         <!-- Button -->

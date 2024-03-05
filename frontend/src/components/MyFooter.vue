@@ -1,6 +1,6 @@
 <template>
   <v-footer class="bg-teal-darken-4" outlined>
-    <v-row justify="center" no-gutters>
+    <v-row justify="center" class="h-25" no-gutters>
       <v-col class="text-center" cols="12">
         {{ new Date().getFullYear() }} — <strong>Helian</strong>
       </v-col>
