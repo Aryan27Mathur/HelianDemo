@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container class="h-75 mt-12 px-12 py-4 align-center">
+    <v-container class="h-screen mt-12 px-12 py-4 align-center">
       <v-row>
         <v-col cols="12">
           <h1 class="mx-auto text-center">Portfolio Analysis</h1>
