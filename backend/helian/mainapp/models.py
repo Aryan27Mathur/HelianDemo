@@ -26,6 +26,10 @@ class ETF(models.Model):
     name = models.CharField(max_length=255)
     vf_esg_score = models.FloatField()
 
-
     def __str__(self):
         return self.symbol
+    
+class DumbUser(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+    ip = models.CharField(max_length=255, blank=True, null=True)
+    portfolio = models.JSONField()

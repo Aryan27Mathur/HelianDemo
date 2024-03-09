@@ -137,8 +137,16 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+if DEBUG:
+    CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOWED_ORIGINS = [
+"https://helianinvestments.com",
+"http://localhost:3000",
+]
 CORS_ALLOW_ALL_ORIGINS = True  # Allow requests from any origin, or specify specific origins
 CORS_ALLOW_METHODS = [
     'DELETE',

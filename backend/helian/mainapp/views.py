@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import csv
+import PyPDF2
 #import pandas as pd
 # Create your views here.
 
@@ -117,4 +118,29 @@ def get_all_company_symbols(request):
     print(symbols)
 
     return HttpResponse(",".join(symbols), status=200)
+
+@csrf_exempt
+def post_portfolio(request):
+    if request.method == 'POST':
+        file_data = print(request.FILES)
+        print(file_data)
+        # Specify the file path where you want to save the file
+        # file_path = 'file.pdf'  # Replace this with your desired file path
+
+        # try:
+        #     # Write the file data to a file
+        #     with open(file_path, 'wb') as f:
+        #         f.write(file_data)
+
+        #     # Return success response
+        return JsonResponse({'success': True})
+        # except Exception as e:
+        #     # Handle any exceptions that occur during file writing
+        #     return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Only POST requests are allowed'}, status=405)
+
+
+
+
 
