@@ -67,13 +67,16 @@ const submitForm = async () => {
 
     try {
       // Make a POST request using fetch
-      const response = await fetch("http://localhost:8000/post_portfolio/", {
-        method: "POST",
-        body: formData,
-        // headers: {
-        //   "Content-Type": "multipart/form-data",
-        // },
-      });
+      const response = await fetch(
+        "https://helian-backend.onrender.com/post_portfolio/",
+        {
+          method: "POST",
+          body: formData,
+          // headers: {
+          //   "Content-Type": "multipart/form-data",
+          // },
+        }
+      );
       // const response = await fetch(
       //   "http://localhost:8000/get_all_company_symbols/"
       // );
