@@ -51,13 +51,14 @@ async function handleEnterKey() {
   // If email is valid, set the signupMessage and send request to backend
   signupMessage.value =
     "Thanks for signing up! Check back for future updates to Helian.";
+  const tempEmail = email.value;
   email.value = "";
   try {
     await axios.post<{ message: string }>(
       "https://helian-backend.onrender.com/newuser/",
       {
-        name: "test",
-        email: email.value,
+        name: "",
+        email: tempEmail,
       }
     );
     console.log("email sent");
