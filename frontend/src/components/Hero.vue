@@ -52,6 +52,7 @@ async function handleEnterKey() {
   signupMessage.value =
     "Thanks for signing up! Check back for future updates to Helian.";
   const tempEmail = email.value;
+  console.log(tempEmail);
   email.value = "";
   try {
     await axios.post<{ message: string }>(
