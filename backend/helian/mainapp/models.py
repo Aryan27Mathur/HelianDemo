@@ -33,3 +33,4 @@ class DumbUser(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
     ip = models.CharField(max_length=255, blank=True, null=True)
     portfolio = models.JSONField()
+    #portfolio_file = models.
