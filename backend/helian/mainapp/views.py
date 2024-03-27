@@ -3,8 +3,11 @@ from .models import User, Company, ETF
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import pandas as pd
 import csv
-import PyPDF2
+import re
+from PyPDF2 import PdfFileReader
+from io import BytesIO
 #import pandas as pd
 # Create your views here.
 
@@ -122,18 +125,57 @@ def get_all_company_symbols(request):
 @csrf_exempt
 def post_portfolio(request):
     if request.method == 'POST':
-        file_data = print(request.FILES)
-        print(file_data)
-        # Specify the file path where you want to save the file
-        # file_path = 'file.pdf'  # Replace this with your desired file path
+        file_data = request.FILES['file']
+        file_content = file_data.file.read()
 
-        # try:
-        #     # Write the file data to a file
-        #     with open(file_path, 'wb') as f:
-        #         f.write(file_data)
+        pdf_stream = BytesIO(file_content)
 
-        #     # Return success response
-        return JsonResponse({'success': True})
+        pdf_reader = PdfFileReader(pdf_stream)
+
+        # Extract text from each page of the PDF file
+
+        start_pattern = r'Portfolio Summary'
+        end_pattern = r'Total Securities'
+
+        total_text=""
+        for page_num in range(pdf_reader.getNumPages()):
+            if(page_num == 0):
+                continue
+            page = pdf_reader.getPage(page_num)
+            total_text += page.extract_text()
+
+        start_match = re.search(start_pattern, total_text)
+        end_match = re.search(end_pattern, total_text)
+
+        if start_match and end_match:
+
+            # Extract the text between start and end points
+            table_text = total_text[start_match.end():end_match.start()]
+            
+            lines = [line.strip() for line in table_text.split('\n') if line.strip()]
+            data_lines = lines[1:]
+            data = [(data_lines[i] + ' ' + data_lines[i+1]).replace('%', '% ') for i in range(0, len(data_lines), 2)]
+
+            # Split each line by space to create a 2D array
+            split_data = []
+            for line in data:
+                first_item, rest_items = line.split('%', 1)
+                split_data.append([first_item.strip('%').strip()] + rest_items.strip().split())
+
+            print(split_data)
+
+            df = pd.DataFrame(split_data, columns=["Securities Held in Account", "Sym/Cusip", "Acct Type", "Qty", "Price", "Mkt Value", "Est. Dividend Yield", "% of Total Portfolio"])
+            print(df.head())
+
+            tickers_and_percentages = df[['Sym/Cusip', "Mkt Value", '% of Total Portfolio']].to_dict(orient='records')
+            # Create a JSON object
+            payload = {
+                "portfolio": tickers_and_percentages
+            }
+            print(payload)
+        else:
+            return None
+        return JsonResponse(payload)
         # except Exception as e:
         #     # Handle any exceptions that occur during file writing
         #     return JsonResponse({'error': str(e)}, status=500)

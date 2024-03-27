@@ -40,6 +40,11 @@
         </v-col>
         <v-col> </v-col>
       </v-row>
+      <v-row>
+        <v-col>
+          <v-data-table v-if="data" :items="data"></v-data-table>
+        </v-col>
+      </v-row>
     </v-container>
     <MyFooter />
   </div>
@@ -51,6 +56,7 @@ import { ref } from "vue";
 // Define a reactive variable to store the selected file
 const selectedFile = ref(null);
 const myIp = ref("");
+const data = ref([]);
 // Define a method to handle form submission
 const submitForm = async () => {
   const file = selectedFile.value[0];
@@ -74,6 +80,7 @@ const submitForm = async () => {
 
       // Parse the JSON response
       const responseData = await response.json();
+      data.value = responseData["portfolio"];
       console.log("Response from backend:", responseData);
     } catch (error) {
       console.error("Error:", error);
