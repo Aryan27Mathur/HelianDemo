@@ -125,6 +125,7 @@ def get_all_company_symbols(request):
 @csrf_exempt
 def post_portfolio(request):
     if request.method == 'POST':
+        print('testing')
         file_data = request.FILES['file']
         file_content = file_data.file.read()
 
