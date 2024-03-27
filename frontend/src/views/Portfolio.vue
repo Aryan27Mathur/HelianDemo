@@ -42,7 +42,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <v-data-table v-if="data" :items="data"></v-data-table>
+          <v-data-table v-if="data.length > 0" :items="data"></v-data-table>
         </v-col>
       </v-row>
     </v-container>
@@ -54,7 +54,7 @@
 import { ref } from "vue";
 
 // Define a reactive variable to store the selected file
-const selectedFile = ref(null);
+const selectedFile = ref([]);
 const myIp = ref("");
 const data = ref([]);
 // Define a method to handle form submission
