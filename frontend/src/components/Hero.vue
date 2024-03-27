@@ -56,10 +56,11 @@ async function handleEnterKey() {
     await axios.post<{ message: string }>(
       "https://helian-backend.onrender.com/newuser/",
       {
-        name: "",
+        name: "test",
         email: email.value,
       }
     );
+    console.log("email sent");
     // Optionally, you can clear the email input after successful signup
   } catch (error) {
     console.error("Error:", error);
