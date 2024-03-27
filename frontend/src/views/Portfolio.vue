@@ -68,7 +68,7 @@ const submitForm = async () => {
     try {
       // Make a POST request using fetch
       const response = await fetch(
-        "https://helian-backend.onrender.com/post_portfolio/",
+        "https://helian-backend.onrender.com/post_portfolio",
         {
           method: "POST",
           body: formData,
